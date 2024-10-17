@@ -4,3 +4,6 @@
 [submodule "reference-manual/databases/postgresql/pgdoc-cn"]
 	path = reference-manual/databases/postgresql/pgdoc-cn
 	url = https://github.com/postgres-cn/pgdoc-cn.git
+[submodule "charts/databases/mysql/innodb_diagrams"]
+	path = charts/databases/mysql/innodb_diagrams
+	url = https://github.com/jeremycole/innodb_diagrams.git
