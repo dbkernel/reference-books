@@ -1,3 +1,6 @@
-[submodule "elasticsearch/elasticsearch-reference-translation"]
-	path = elasticsearch/elasticsearch-reference-translation
+[submodule "reference-manual/databases/elasticsearch/elasticsearch-reference-translation"]
+	path = reference-manual/databases/elasticsearch/elasticsearch-reference-translation
 	url = https://github.com/rpgmakervx/elasticsearch-reference-translation.git
+[submodule "reference-manual/databases/postgresql/pgdoc-cn"]
+	path = reference-manual/databases/postgresql/pgdoc-cn
+	url = https://github.com/postgres-cn/pgdoc-cn.git

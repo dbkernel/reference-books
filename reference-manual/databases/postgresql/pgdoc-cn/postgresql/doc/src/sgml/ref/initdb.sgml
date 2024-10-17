@@ -1,0 +1,975 @@
+<!--
+doc/src/sgml/ref/initdb.sgml
+PostgreSQL documentation
+-->
+
+<refentry id="app-initdb">
+<!-- pgdoc-cn_start sig_en=ea9ba0b97e52876d7ab4e1ee6fb8abde sig_cn_org=None source=14.1 
+ <indexterm zone="app-initdb">
+  <primary>initdb</primary>
+ </indexterm>
+________________________________________________________-->
+ <indexterm zone="app-initdb">
+  <primary>initdb</primary>
+ </indexterm>
+<!-- pgdoc-cn_end sig_en=ea9ba0b97e52876d7ab4e1ee6fb8abde -->
+
+ <refmeta>
+  <refentrytitle><application>initdb</application></refentrytitle>
+  <manvolnum>1</manvolnum>
+  <refmiscinfo>Application</refmiscinfo>
+ </refmeta>
+
+<!-- pgdoc-cn_start sig_en=13b8d870abee64140c8c5eb065754f38 sig_cn_org=None source=14.1 
+ <refnamediv>
+  <refname>initdb</refname>
+  <refpurpose>create a new <productname>PostgreSQL</productname> database cluster</refpurpose>
+ </refnamediv>
+________________________________________________________-->
+ <refnamediv>
+  <refname>initdb</refname>
+  <refpurpose>创建一个新的<productname>PostgreSQL</productname>数据库集簇</refpurpose>
+ </refnamediv>
+<!-- pgdoc-cn_end sig_en=13b8d870abee64140c8c5eb065754f38 -->
+
+ <refsynopsisdiv>
+  <cmdsynopsis>
+   <command>initdb</command>
+   <arg rep="repeat"><replaceable>option</replaceable></arg>
+   <group choice="plain">
+    <group choice="opt">
+     <arg choice="plain"><option>--pgdata</option></arg>
+     <arg choice="plain"><option>-D</option></arg>
+    </group>
+    <replaceable> directory</replaceable>
+   </group>
+  </cmdsynopsis>
+ </refsynopsisdiv>
+
+ <refsect1 id="r1-app-initdb-1">
+<!-- pgdoc-cn_start sig_en=59d6e86f3a60db4f1e08d0d6e639924e sig_cn_org=None source=14.1 
+  <title>Description</title>
+________________________________________________________-->
+  <title>描述</title>
+<!-- pgdoc-cn_end sig_en=59d6e86f3a60db4f1e08d0d6e639924e -->
+<!-- pgdoc-cn_start sig_en=12246bfb40c2e41d70831c7009c340df sig_cn_org=None source=14.1 
+  <para>
+   <command>initdb</command> creates a new
+   <productname>PostgreSQL</productname> database cluster.  A database
+   cluster is a collection of databases that are managed by a single
+   server instance.
+  </para>
+________________________________________________________-->
+  <para>
+   <command>initdb</command>创建一个新的<productname>PostgreSQL</productname>数据库集簇。一个数据库集簇是由一个单一服务器实例管理的数据库的集合。
+  </para>
+<!-- pgdoc-cn_end sig_en=12246bfb40c2e41d70831c7009c340df -->
+
+<!-- pgdoc-cn_start sig_en=845cff7caf007235abdce7a61577383b sig_cn_org=df7e8ffca676653a9a2475bda72449f6 source=15.7 
+  <para>
+   Creating a database cluster consists of creating the directories in
+   which the database data will live, generating the shared catalog
+   tables (tables that belong to the whole cluster rather than to any
+   particular database), and creating the <literal>postgres</literal>,
+   <literal>template1</literal>, and <literal>template0</literal> databases.
+   The <literal>postgres</literal> database is a default database meant
+   for use by users, utilities and third party applications.
+   <literal>template1</literal> and <literal>template0</literal> are
+   meant as source databases to be copied by later <command>CREATE
+   DATABASE</command> commands.  <literal>template0</literal> should never
+   be modified, but you can add objects to <literal>template1</literal>,
+   which by default will be copied into databases created later.  See
+   <xref linkend="manage-ag-templatedbs"/> for more details.
+  </para>
+________________________________________________________-->
+  <para>
+   创建数据库集群包括创建数据库数据将存放的目录，生成共享目录表（属于整个集群而不是任何特定数据库的表），
+   并创建<literal>postgres</literal>，<literal>template1</literal>和<literal>template0</literal>数据库。
+   <literal>postgres</literal>数据库是一个默认数据库，供用户、工具和第三方应用程序使用。
+   <literal>template1</literal>和<literal>template0</literal>被用作后续<command>CREATE DATABASE</command>命令复制的源数据库。
+   <literal>template0</literal>不应该被修改，但可以向<literal>template1</literal>添加对象，默认情况下这些对象将被复制到后续创建的数据库中。
+   更多详细信息请参见<xref linkend="manage-ag-templatedbs"/>。
+</para>
+<!-- pgdoc-cn_end sig_en=845cff7caf007235abdce7a61577383b -->
+
+<!-- pgdoc-cn_start sig_en=39e0caecf409bf03891352fb3635d8b0 sig_cn_org=None source=14.1 
+  <para>
+   Although <command>initdb</command> will attempt to create the
+   specified data directory, it might not have permission if the parent
+   directory of the desired data directory is root-owned. To initialize
+   in such a setup, create an empty data directory as root, then use
+   <command>chown</command> to assign ownership of that directory to the
+   database user account, then <command>su</command> to become the
+   database user to run <command>initdb</command>.
+  </para>
+________________________________________________________-->
+  <para>
+   尽管<command>initdb</command>将尝试创建指定的数据目录，它可能没有权限（如果想要的数据目录的父目录被根用户拥有）。要在这样一种设置中初始化，作为 root 创建一个空数据目录，然后使用<command>chown</command>将该目录赋予给数据库用户账户，再然后<command>su</command>成为该数据库用户并运行<command>initdb</command>。
+  </para>
+<!-- pgdoc-cn_end sig_en=39e0caecf409bf03891352fb3635d8b0 -->
+
+<!-- pgdoc-cn_start sig_en=7f372014d7105436ed97bf4e2c3a619a sig_cn_org=None source=14.1 
+  <para>
+   <command>initdb</command> must be run as the user that will own the
+   server process, because the server needs to have access to the
+   files and directories that <command>initdb</command> creates.
+   Since the server cannot be run as root, you must not run
+   <command>initdb</command> as root either.  (It will in fact refuse
+   to do so.)
+  </para>
+________________________________________________________-->
+  <para>
+   <command>initdb</command>必须以将拥有该服务器进程的用户运行，因为该服务器需要访问<command>initdb</command>创建的文件和目录。因为该服务器不能作为 root 运行，你不能以 root 运行<command>initdb</command>（事实上它会拒绝这样做）。
+  </para>
+<!-- pgdoc-cn_end sig_en=7f372014d7105436ed97bf4e2c3a619a -->
+
+<!-- pgdoc-cn_start sig_en=4ef9431c373764d5e56c5e3531600d78 sig_cn_org=None source=14.1 
+  <para>
+    For security reasons the new cluster created by <command>initdb</command>
+    will only be accessible by the cluster owner by default.  The
+    <option>-&minus;allow-group-access</option> option allows any user in the same
+    group as the cluster owner to read files in the cluster.  This is useful
+    for performing backups as a non-privileged user.
+  </para>
+________________________________________________________-->
+  <para>
+    由于安全原因，由<command>initdb</command>创建的新集簇默认将只能由集簇拥有者访问。<option>--allow-group-access</option>选项允许与集簇拥有者同组的任何用户读取集簇中的文件。这对非特权用户执行备份很有用。
+  </para>
+<!-- pgdoc-cn_end sig_en=4ef9431c373764d5e56c5e3531600d78 -->
+
+<!-- pgdoc-cn_start sig_en=e81355863f2f007abf1c0ab260200d26 sig_cn_org=36a7f43b7ebdf46a645a3b3b22eb73ad source=15.7 
+  <para>
+   <command>initdb</command> initializes the database cluster's default locale
+   and character set encoding. These can also be set separately for each
+   database when it is created. <command>initdb</command> determines those
+   settings for the template databases, which will serve as the default for
+   all other databases.  By default, <command>initdb</command> uses the
+   locale provider <literal>libc</literal>, takes the locale settings from
+   the environment, and determines the encoding from the locale settings.
+   This is almost always sufficient, unless there are special requirements.
+  </para>
+________________________________________________________-->
+  <para>
+   <command>initdb</command>初始化数据库集群的默认区域设置和字符集编码。这些也可以在每个数据库创建时单独设置。
+   <command>initdb</command>确定模板数据库的这些设置，这将作为所有其他数据库的默认设置。
+   默认情况下，<command>initdb</command>使用区域设置提供程序<literal>libc</literal>，从环境中获取区域设置，并根据区域设置确定编码。
+   这几乎总是足够的，除非有特殊要求。
+</para>
+<!-- pgdoc-cn_end sig_en=e81355863f2f007abf1c0ab260200d26 -->
+
+<!-- pgdoc-cn_start sig_en=9772500edaa0725642c78ce7a0c88fe6 sig_cn_org=82a5f49af80e8b8f785d41e617736996 source=15.7 
+  <para>
+   To choose a different locale for the cluster, use the option
+   <option>-&minus;locale</option>.  There are also individual options
+   <option>-&minus;lc-*</option> (see below) to set values for the individual locale
+   categories.  Note that inconsistent settings for different locale
+   categories can give nonsensical results, so this should be used with care.
+  </para>
+________________________________________________________-->
+  <para>
+   要为集群选择不同的区域设置，请使用选项
+   <option>--locale</option>。还有一些单独的选项
+   <option>--lc-*</option>（见下文）用于设置各个区域设置的值。
+   请注意，不同区域设置的不一致可能导致荒谬的结果，因此应谨慎使用。
+</para>
+<!-- pgdoc-cn_end sig_en=9772500edaa0725642c78ce7a0c88fe6 -->
+
+<!-- pgdoc-cn_start sig_en=cfd65be9568a9b22fe6f3f5d271f0573 sig_cn_org=c638945a4ba391caf2acf4063adba21e source=15.7 
+  <para>
+   Alternatively, the ICU library can be used to provide locale services.
+   (Again, this only sets the default for subsequently created databases.)  To
+   select this option, specify <literal>-&minus;locale-provider=icu</literal>.
+   To choose the specific ICU locale ID to apply, use the option
+   <option>-&minus;icu-locale</option>.  Note that
+   for implementation reasons and to support legacy code,
+   <command>initdb</command> will still select and initialize libc locale
+   settings when the ICU locale provider is used.
+  </para>
+________________________________________________________-->
+  <para>
+   或者，ICU库可以用来提供区域设置服务。
+   （同样，这仅设置随后创建的数据库的默认值。）要选择此选项，请指定<literal>--locale-provider=icu</literal>。
+   要选择要应用的特定ICU区域设置ID，请使用选项<option>--icu-locale</option>。请注意，
+   出于实现原因和支持旧代码，
+   当使用ICU区域提供程序时，<command>initdb</command>仍将选择并初始化libc区域设置。
+</para>
+<!-- pgdoc-cn_end sig_en=cfd65be9568a9b22fe6f3f5d271f0573 -->
+
+<!-- pgdoc-cn_start sig_en=21ccb5f087201cc0b536e1183b5dff1c sig_cn_org=791eeefb607b4ef6bde824a9d7a5b9f2 source=15.7 
+  <para>
+   When <command>initdb</command> runs, it will print out the locale settings
+   it has chosen.  If you have complex requirements or specified multiple
+   options, it is advisable to check that the result matches what was
+   intended.
+  </para>
+________________________________________________________-->
+  <para>
+   当<command>initdb</command>运行时，它会打印出所选择的区域设置。如果您有复杂的要求或指定了多个选项，
+   建议检查结果是否符合预期。
+</para>
+<!-- pgdoc-cn_end sig_en=21ccb5f087201cc0b536e1183b5dff1c -->
+
+<!-- pgdoc-cn_start sig_en=98b3a5f7d34d63ca299023e0e088b4de sig_cn_org=50e278b3216c99e97d18bdc4236e1073 source=15.7 
+  <para>
+   More details about locale settings can be found in <xref
+   linkend="locale"/>.
+  </para>
+________________________________________________________-->
+  <para>
+   更多有关区域设置的详细信息可以在<xref linkend="locale"/>中找到。
+</para>
+<!-- pgdoc-cn_end sig_en=98b3a5f7d34d63ca299023e0e088b4de -->
+
+<!-- pgdoc-cn_start sig_en=40c2c0bcc7122827d0833180a58d4885 sig_cn_org=None source=14.1 
+  <para>
+   To alter the default encoding, use the <option>-&minus;encoding</option>.
+   More details can be found in <xref linkend="multibyte"/>.
+  </para>
+________________________________________________________-->
+  <para>
+   要修改默认编码，使用<option>--encoding</option>。详见<xref linkend="multibyte"/>.
+  </para>
+<!-- pgdoc-cn_end sig_en=40c2c0bcc7122827d0833180a58d4885 -->
+
+ </refsect1>
+
+ <refsect1>
+<!-- pgdoc-cn_start sig_en=ee3f399228d18d2103d5b7f4e0aeeba8 sig_cn_org=None source=14.1 
+  <title>Options</title>
+________________________________________________________-->
+  <title>选项</title>
+<!-- pgdoc-cn_end sig_en=ee3f399228d18d2103d5b7f4e0aeeba8 -->
+
+   <para>
+    <variablelist>
+     <varlistentry>
+      <term><option>-A <replaceable class="parameter">authmethod</replaceable></option></term>
+      <term><option>--auth=<replaceable class="parameter">authmethod</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=ee2d50abbeb86237cf8f7003f680ac79 sig_cn_org=ed8ee199d96cc00152aec8b5e6dd4f89 source=15.7 
+       <para>
+        This option specifies the default authentication method for local
+        users used in <filename>pg_hba.conf</filename> (<literal>host</literal>
+        and <literal>local</literal> lines).  See <xref linkend="auth-pg-hba-conf"/>
+        for an overview of valid values.
+       </para>
+________________________________________________________-->
+       <para>
+        这个选项指定了用于<filename>pg_hba.conf</filename>（<literal>host</literal>和<literal>local</literal>行）中使用的本地用户的默认身份验证方法。
+        有关有效值的概述，请参阅<xref linkend="auth-pg-hba-conf"/>。
+       </para>
+<!-- pgdoc-cn_end sig_en=ee2d50abbeb86237cf8f7003f680ac79 -->
+
+<!-- pgdoc-cn_start sig_en=12e1c73dd9b5a1b919b5004d4a71a87b sig_cn_org=96809dc51195325c5cc2a0228844e3fa source=15.7 
+       <para>
+        <command>initdb</command> will
+        prepopulate <filename>pg_hba.conf</filename> entries using the
+        specified authentication method for non-replication as well as
+        replication connections.
+       </para>
+________________________________________________________-->
+       <para>
+        <command>initdb</command>将使用指定的身份验证方法为非复制连接和复制连接预填充<filename>pg_hba.conf</filename>条目。
+       </para>
+<!-- pgdoc-cn_end sig_en=12e1c73dd9b5a1b919b5004d4a71a87b -->
+
+<!-- pgdoc-cn_start sig_en=0327cf48d7324e554a97c7a28d3d28e4 sig_cn_org=6bcf296f3d7d2bfa925e9cf2a89e58c2 source=15.7 
+       <para>
+        Do not use <literal>trust</literal> unless you trust all local users on your
+        system.  <literal>trust</literal> is the default for ease of installation.
+       </para>
+________________________________________________________-->
+       <para>
+        不要使用<literal>trust</literal>，除非您信任系统上的所有本地用户。<literal>trust</literal>是为了安装方便而默认设置的。
+       </para>
+<!-- pgdoc-cn_end sig_en=0327cf48d7324e554a97c7a28d3d28e4 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--auth-host=<replaceable class="parameter">authmethod</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=7b6b61cdfcd307e4f262db161ed32676 sig_cn_org=84f6966a00db2838c081342ba79c281d source=15.7 
+       <para>
+        This option specifies the authentication method for local users via
+        TCP/IP connections used in <filename>pg_hba.conf</filename>
+        (<literal>host</literal> lines).
+       </para>
+________________________________________________________-->
+       <para>
+        该选项指定了通过TCP/IP连接在<filename>pg_hba.conf</filename>（<literal>host</literal>行中使用的本地用户的身份验证方法）。
+       </para>
+<!-- pgdoc-cn_end sig_en=7b6b61cdfcd307e4f262db161ed32676 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--auth-local=<replaceable class="parameter">authmethod</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=77a687e9047d0ffdb253f3f443f77a75 sig_cn_org=8adc2437b14e090a7c378d2cb80d1a2e source=15.7 
+       <para>
+        This option specifies the authentication method for local users via
+        Unix-domain socket connections used in <filename>pg_hba.conf</filename>
+        (<literal>local</literal> lines).
+       </para>
+________________________________________________________-->
+       <para>
+        这个选项指定了本地用户通过Unix域套接字连接在<filename>pg_hba.conf</filename>
+        (<literal>local</literal>行)中使用的身份验证方法。
+       </para>
+<!-- pgdoc-cn_end sig_en=77a687e9047d0ffdb253f3f443f77a75 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-D <replaceable class="parameter">directory</replaceable></option></term>
+      <term><option>--pgdata=<replaceable class="parameter">directory</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=240d864aedcdcb1b1ed35967f470b1db sig_cn_org=92701b48a7847829abfec1002822cf6d source=15.7 
+       <para>
+        This option specifies the directory where the database cluster
+        should be stored. This is the only information required by
+        <command>initdb</command>, but you can avoid writing it by
+        setting the <envar>PGDATA</envar> environment variable, which
+        can be convenient since the database server
+        (<command>postgres</command>) can find the database
+        directory later by the same variable.
+       </para>
+________________________________________________________-->
+       <para>
+        这个选项指定了数据库集群应该存储的目录。这是<command>initdb</command>所需的唯一信息，
+        但您可以通过设置<envar>PGDATA</envar>环境变量来避免编写它，这样做可能更方便，
+        因为数据库服务器(<command>postgres</command>)稍后可以通过相同的变量找到数据库目录。
+       </para>
+<!-- pgdoc-cn_end sig_en=240d864aedcdcb1b1ed35967f470b1db -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-E <replaceable class="parameter">encoding</replaceable></option></term>
+      <term><option>--encoding=<replaceable class="parameter">encoding</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=79b325dcaf4a51587314d266b3054d74 sig_cn_org=6e9fd4a00f9ed4a9009de576cbdfb7b9 source=15.7 
+       <para>
+        Selects the encoding of the template databases. This will also
+        be the default encoding of any database you create later,
+        unless you override it then.  The default is derived from the locale,
+        if the libc locale provider is used, or <literal>UTF8</literal> if the
+        ICU locale provider is used.  The character sets supported by
+        the <productname>PostgreSQL</productname> server are described
+        in <xref linkend="multibyte-charset-supported"/>.
+       </para>
+________________________________________________________-->
+       <para>
+        选择模板数据库的编码。这也将是以后创建的任何数据库的默认编码，除非您在那时覆盖它。
+        如果使用libc区域提供程序，默认值是从区域设置派生的；如果使用ICU区域提供程序，则为<literal>UTF8</literal>。
+         <productname>PostgreSQL</productname>服务器支持的字符集在<xref linkend="multibyte-charset-supported"/>中描述。
+       </para>
+<!-- pgdoc-cn_end sig_en=79b325dcaf4a51587314d266b3054d74 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry id="app-initdb-allow-group-access" xreflabel="group access">
+      <term><option>-g</option></term>
+      <term><option>--allow-group-access</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=422101289e3e7462131b348f3993a317 sig_cn_org=5a48725fe1ab353c7c09f8c942a9d053 source=15.7 
+       <para>
+        Allows users in the same group as the cluster owner to read all cluster
+        files created by <command>initdb</command>.  This option is ignored
+        on <productname>Windows</productname> as it does not support
+        <acronym>POSIX</acronym>-style group permissions.
+       </para>
+________________________________________________________-->
+       <para>
+        允许与集群所有者在同一组中的用户读取由<command>initdb</command>创建的所有集群文件。
+        此选项在<productname>Windows</productname>上被忽略，因为它不支持<acronym>POSIX</acronym>风格的组权限。
+       </para>
+<!-- pgdoc-cn_end sig_en=422101289e3e7462131b348f3993a317 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--icu-locale=<replaceable>locale</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=04f363e0e33a856648978a093505f756 sig_cn_org=aaa9956376e592dc4e4e9a539c41325d source=15.7 
+       <para>
+        Specifies the ICU locale ID, if the ICU locale provider is used.
+       </para>
+________________________________________________________-->
+       <para>
+        指定ICU区域设置ID，如果使用ICU区域设置提供程序。
+       </para>
+<!-- pgdoc-cn_end sig_en=04f363e0e33a856648978a093505f756 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry id="app-initdb-data-checksums" xreflabel="data checksums">
+      <term><option>-k</option></term>
+      <term><option>--data-checksums</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=48b8e5861428752ca191eb24e78490e5 sig_cn_org=26dd7270d36884d5920bb24716486d2d source=15.7 
+       <para>
+        Use checksums on data pages to help detect corruption by the
+        I/O system that would otherwise be silent. Enabling checksums
+        may incur a noticeable performance penalty. If set, checksums
+        are calculated for all objects, in all databases. All checksum
+        failures will be reported in the
+        <link linkend="monitoring-pg-stat-database-view">
+        <structname>pg_stat_database</structname></link> view.
+        See <xref linkend="checksums" /> for details.
+       </para>
+________________________________________________________-->
+       <para>
+        使用数据页上的校验和来帮助检测I/O系统可能会默默发生的损坏。启用校验和可能会导致明显的性能损失。如果设置了校验和，将为所有对象在所有数据库中计算校验和。所有校验失败将在
+        <link linkend="monitoring-pg-stat-database-view">
+        <structname>pg_stat_database</structname></link> 视图中报告。详细信息请参见<xref linkend="checksums" />。
+       </para>
+<!-- pgdoc-cn_end sig_en=48b8e5861428752ca191eb24e78490e5 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--locale=<replaceable>locale</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=33bef41e04fda7607a5ec06a5c283d61 sig_cn_org=e3b7a8210a387deeec7e1c3138511d2a source=15.7 
+       <para>
+        Sets the default locale for the database cluster.  If this
+        option is not specified, the locale is inherited from the
+        environment that <command>initdb</command> runs in. Locale
+        support is described in <xref linkend="locale"/>.
+       </para>
+________________________________________________________-->
+       <para>
+        设置数据库集群的默认区域设置。如果未指定此选项，则区域设置将从<command>initdb</command>运行的环境继承。
+        区域设置支持在<xref linkend="locale"/>中描述。
+       </para>
+<!-- pgdoc-cn_end sig_en=33bef41e04fda7607a5ec06a5c283d61 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--lc-collate=<replaceable>locale</replaceable></option></term>
+      <term><option>--lc-ctype=<replaceable>locale</replaceable></option></term>
+      <term><option>--lc-messages=<replaceable>locale</replaceable></option></term>
+      <term><option>--lc-monetary=<replaceable>locale</replaceable></option></term>
+      <term><option>--lc-numeric=<replaceable>locale</replaceable></option></term>
+      <term><option>--lc-time=<replaceable>locale</replaceable></option></term>
+
+      <listitem>
+<!-- pgdoc-cn_start sig_en=5ca6e6ff0adad12b4273cedbe1d66e0a sig_cn_org=0b7f0636906489b1708090e69dfd9be8 source=15.7 
+       <para>
+        Like <option>-&minus;locale</option>, but only sets the locale in
+        the specified category.
+       </para>
+________________________________________________________-->
+       <para>
+        类似于<option>--locale</option>，但仅在指定的类别中设置区域设置。
+       </para>
+<!-- pgdoc-cn_end sig_en=5ca6e6ff0adad12b4273cedbe1d66e0a -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--no-locale</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=128a5dcb6a40337e081b206d71000399 sig_cn_org=05e74546c10404bc3941166904d5278a source=15.7 
+       <para>
+        Equivalent to <option>-&minus;locale=C</option>.
+       </para>
+________________________________________________________-->
+       <para>
+        等同于<option>--locale=C</option>。
+       </para>
+<!-- pgdoc-cn_end sig_en=128a5dcb6a40337e081b206d71000399 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--locale-provider={<literal>libc</literal>|<literal>icu</literal>}</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=379a6f8f01bfabbd35a31210d5294b2e sig_cn_org=7f1aee9c9bbe10fba83110ef175d4747 source=15.7 
+       <para>
+        This option sets the locale provider for databases created in the
+        new cluster.  It can be overridden in the <command>CREATE
+        DATABASE</command> command when new databases are subsequently
+        created.  The default is <literal>libc</literal>.
+       </para>
+________________________________________________________-->
+       <para>
+        这个选项设置了新集群中创建的数据库的区域设置提供程序。在后续创建新数据库时，
+        可以在<command>CREATE DATABASE</command>命令中覆盖它。默认值是<literal>libc</literal>。
+       </para>
+<!-- pgdoc-cn_end sig_en=379a6f8f01bfabbd35a31210d5294b2e -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-N</option></term>
+      <term><option>--no-sync</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=64fdc9df83aa0718ebe4717af883eb33 sig_cn_org=7664a1581c39bd4875b52fe8c6575096 source=15.7 
+       <para>
+        By default, <command>initdb</command> will wait for all files to be
+        written safely to disk.  This option causes <command>initdb</command>
+        to return without waiting, which is faster, but means that a
+        subsequent operating system crash can leave the data directory
+        corrupt.  Generally, this option is useful for testing, but should not
+        be used when creating a production installation.
+       </para>
+________________________________________________________-->
+       <para>
+        默认情况下，<command>initdb</command>将等待所有文件被安全写入磁盘。
+        此选项导致<command>initdb</command>在不等待的情况下返回，这样更快，
+        但意味着随后的操作系统崩溃可能会使数据目录损坏。通常，此选项在测试时很有用，
+        但在创建生产安装时不应使用。
+       </para>
+<!-- pgdoc-cn_end sig_en=64fdc9df83aa0718ebe4717af883eb33 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--no-instructions</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=15e26f15d1a6b369de6f47219ede4b7b sig_cn_org=6eb4a23db2ca2b5d4729ef743ffd8569 source=15.7 
+       <para>
+        By default, <command>initdb</command> will write instructions for how
+        to start the cluster at the end of its output. This option causes
+        those instructions to be left out. This is primarily intended for use
+        by tools that wrap <command>initdb</command> in platform-specific
+        behavior, where those instructions are likely to be incorrect.
+       </para>
+________________________________________________________-->
+       <para>
+        默认情况下，<command>initdb</command>会在输出的末尾写入启动集群的说明。
+        此选项会导致省略这些说明。这主要是为了供将<command>initdb</command>包装在特定平台行为中的工具使用，
+        在那些说明可能不正确的情况下。
+       </para>
+<!-- pgdoc-cn_end sig_en=15e26f15d1a6b369de6f47219ede4b7b -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--pwfile=<replaceable>filename</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=b7cedab4ee518a7d88d2127cd32d911e sig_cn_org=469e53e892564a9bcc4caa224813ae0c source=15.7 
+       <para>
+        Makes <command>initdb</command> read the database superuser's password
+        from a file.  The first line of the file is taken as the password.
+       </para>
+________________________________________________________-->
+       <para>
+        使<command>initdb</command>从文件中读取数据库超级用户的密码。文件的第一行被作为密码。
+       </para>
+<!-- pgdoc-cn_end sig_en=b7cedab4ee518a7d88d2127cd32d911e -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-S</option></term>
+      <term><option>--sync-only</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=e1028822255eb72771a33ba267a8ddbe sig_cn_org=1c2e3a19d8db0575913e8ac424282270 source=15.7 
+       <para>
+        Safely write all database files to disk and exit.  This does not
+        perform any of the normal <application>initdb</application> operations.
+        Generally, this option is useful for ensuring reliable recovery after
+        changing <xref linkend="guc-fsync"/> from <literal>off</literal> to
+        <literal>on</literal>.
+       </para>
+________________________________________________________-->
+       <para>
+        安全地将所有数据库文件写入磁盘并退出。这不执行任何正常的<application>initdb</application>操作。
+        通常，此选项对于在将<xref linkend="guc-fsync"/>从<literal>off</literal>更改为<literal>on</literal>后确保可靠恢复很有用。
+       </para>
+<!-- pgdoc-cn_end sig_en=e1028822255eb72771a33ba267a8ddbe -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-T <replaceable>config</replaceable></option></term>
+      <term><option>--text-search-config=<replaceable>config</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=7f09887a4e16f762f49ffb182d0c8f45 sig_cn_org=084c7c06d16e11a4c4dbbdff7bff8c65 source=15.7 
+       <para>
+        Sets the default text search configuration.
+        See <xref linkend="guc-default-text-search-config"/> for further information.
+       </para>
+________________________________________________________-->
+       <para>
+        设置默认的文本搜索配置。
+        有关更多信息，请参见<xref linkend="guc-default-text-search-config"/>。
+       </para>
+<!-- pgdoc-cn_end sig_en=7f09887a4e16f762f49ffb182d0c8f45 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-U <replaceable class="parameter">username</replaceable></option></term>
+      <term><option>--username=<replaceable class="parameter">username</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=46d28743a0794ad44f63b01e03755b35 sig_cn_org=252aa7750fddf145ea187048a893ba7c source=15.7 
+       <para>
+        Selects the user name of the database superuser. This defaults
+        to the name of the effective user running
+        <command>initdb</command>. It is really not important what the
+        superuser's name is, but one might choose to keep the
+        customary name <systemitem>postgres</systemitem>, even if the operating
+        system user's name is different.
+       </para>
+________________________________________________________-->
+       <para>
+        选择数据库超级用户的用户名。默认情况下，这是运行<command>initdb</command>的有效用户的名称。
+        超级用户的名称并不重要，但可以选择保留惯用名称<systemitem>postgres</systemitem>，即使操作系统用户的名称不同。
+       </para>
+<!-- pgdoc-cn_end sig_en=46d28743a0794ad44f63b01e03755b35 -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-W</option></term>
+      <term><option>--pwprompt</option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=0379272123c2f8e3606fdb017de12e56 sig_cn_org=f8f9411168d968756ed8a54a23a6ff63 source=15.7 
+       <para>
+        Makes <command>initdb</command> prompt for a password
+        to give the database superuser. If you don't plan on using password
+        authentication, this is not important.  Otherwise you won't be
+        able to use password authentication until you have a password
+        set up.
+       </para>
+________________________________________________________-->
+       <para>
+        使<command>initdb</command>提示输入密码，以赋予数据库超级用户权限。如果您不打算使用密码验证，这并不重要。
+        否则，您将无法使用密码验证，直到设置了密码为止。
+       </para>
+<!-- pgdoc-cn_end sig_en=0379272123c2f8e3606fdb017de12e56 -->
+      </listitem>
+     </varlistentry>
+
+      <varlistentry>
+      <term><option>-X <replaceable class="parameter">directory</replaceable></option></term>
+      <term><option>--waldir=<replaceable class="parameter">directory</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=eca2b770df072bfd00fff230f1077dad sig_cn_org=098fc69e42685c6884cab816714ce98f source=15.7 
+       <para>
+        This option specifies the directory where the write-ahead log
+        should be stored.
+       </para>
+________________________________________________________-->
+       <para>
+        这个选项指定了预写日志应该存储的目录。
+       </para>
+<!-- pgdoc-cn_end sig_en=eca2b770df072bfd00fff230f1077dad -->
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>--wal-segsize=<replaceable>size</replaceable></option></term>
+      <listitem>
+<!-- pgdoc-cn_start sig_en=bad66bd13c7a5f4846613f7ba51647a7 sig_cn_org=4a36d47c53753a703a0520f18bafc800 source=15.7 
+       <para>
+        Set the <firstterm>WAL segment size</firstterm>, in megabytes.  This
+        is the size of each individual file in the WAL log.  The default size
+        is 16 megabytes.  The value must be a power of 2 between 1 and 1024
+        (megabytes).  This option can only be set during initialization, and
+        cannot be changed later.
+       </para>
+________________________________________________________-->
+       <para>
+        设置<firstterm>WAL段大小</firstterm>，单位为兆字节。这是WAL日志中每个单独文件的大小。
+        默认大小为16兆字节。该值必须是1到1024（兆字节）之间的2的幂。此选项只能在初始化期间设置，
+        以后不能更改。
+       </para>
+<!-- pgdoc-cn_end sig_en=bad66bd13c7a5f4846613f7ba51647a7 -->
+
+<!-- pgdoc-cn_start sig_en=cfaee057f27770601b029edb871764b0 sig_cn_org=08507c06e48126879abf3d9d779ebb12 source=15.7 
+       <para>
+        It may be useful to adjust this size to control the granularity of
+        WAL log shipping or archiving.  Also, in databases with a high volume
+        of WAL, the sheer number of WAL files per directory can become a
+        performance and management problem.  Increasing the WAL file size
+        will reduce the number of WAL files.
+       </para>
+________________________________________________________-->
+       <para>
+        调整这个大小可能是有用的，以控制WAL日志传送或归档的粒度。此外，在具有大量WAL的数据库中，每个目录中的WAL文件数量之多可能会成为性能和管理问题。增加WAL文件大小将减少WAL文件数量。
+       </para>
+<!-- pgdoc-cn_end sig_en=cfaee057f27770601b029edb871764b0 -->
+      </listitem>
+     </varlistentry>
+    </variablelist>
+   </para>
+
+<!-- pgdoc-cn_start sig_en=6004c4f8f8dee48fee8fac1f5dc8be66 sig_cn_org=None source=14.1 
+   <para>
+    Other, less commonly used, options are also available:
+
+    <variablelist>
+     <varlistentry>
+      <term><option>-d</option></term>
+      <term><option>-&minus;debug</option></term>
+      <listitem>
+       <para>
+        Print debugging output from the bootstrap backend and a few other
+        messages of lesser interest for the general public.
+        The bootstrap backend is the program <command>initdb</command>
+        uses to create the catalog tables.  This option generates a tremendous
+        amount of extremely boring output.
+       </para>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-&minus;discard-caches</option></term>
+      <listitem>
+       <para>
+        Run the bootstrap backend with the
+        <literal>debug_discard_caches=1</literal> option.
+        This takes a very long time and is only of use for deep debugging.
+       </para>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-L <replaceable class="parameter">directory</replaceable></option></term>
+      <listitem>
+       <para>
+        Specifies where <command>initdb</command> should find
+        its input files to initialize the database cluster.  This is
+        normally not necessary.  You will be told if you need to
+        specify their location explicitly.
+       </para>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-n</option></term>
+      <term><option>-&minus;no-clean</option></term>
+      <listitem>
+       <para>
+        By default, when <command>initdb</command>
+        determines that an error prevented it from completely creating the database
+        cluster, it removes any files it might have created before discovering
+        that it cannot finish the job. This option inhibits tidying-up and is
+        thus useful for debugging.
+       </para>
+      </listitem>
+     </varlistentry>
+    </variablelist>
+   </para>
+________________________________________________________-->
+   <para>
+    其他较少使用的选项：
+
+    <variablelist>
+     <varlistentry>
+      <term><option>-d</option></term>
+      <term><option>--debug</option></term>
+      <listitem>
+       <para>
+        打印来自引导后端的调试输出以及普通大众不那么感兴趣的一些消息。引导后端被程序<command>initdb</command>用来创建目录表。这个选项会生成大量极端无聊的输出。
+       </para>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-&minus;discard-caches</option></term>
+      <listitem>
+       <para>
+        使用<literal>debug_discard_caches=1</literal>选项运行引导程序后端。
+        这需要很长时间并且只适用于深度调试。
+       </para>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-L <replaceable class="parameter">directory</replaceable></option></term>
+      <listitem>
+       <para>
+        指定<command>initdb</command>应从哪里寻找它的输入文件来初始化数据库集簇。这通常没有必要。如果你需要显式指定它们的位置，你应该被告知。
+       </para>
+      </listitem>
+     </varlistentry>
+
+     <varlistentry>
+      <term><option>-n</option></term>
+      <term><option>--no-clean</option></term>
+      <listitem>
+       <para>
+        默认情况下，当<command>initdb</command>确定有一个错误阻止它完整地创建数据库集簇，它会移除在它发现无法完成任务之前创建的任何文件。这个选项会抑制这种整理并且对调试有用。
+       </para>
+      </listitem>
+     </varlistentry>
+    </variablelist>
+   </para>
+<!-- pgdoc-cn_end sig_en=6004c4f8f8dee48fee8fac1f5dc8be66 -->
+
+<!-- pgdoc-cn_start sig_en=7b5c28a9877eab4fc3580ad33b9e565b sig_cn_org=None source=14.1 
+   <para>
+    Other options:
+
+    <variablelist>
+     <varlistentry>
+       <term><option>-V</option></term>
+       <term><option>-&minus;version</option></term>
+       <listitem>
+       <para>
+       Print the <application>initdb</application> version and exit.
+       </para>
+       </listitem>
+     </varlistentry>
+
+     <varlistentry>
+       <term><option>-?</option></term>
+       <term><option>-&minus;help</option></term>
+       <listitem>
+       <para>
+       Show help about <application>initdb</application> command line
+       arguments, and exit.
+       </para>
+       </listitem>
+     </varlistentry>
+
+    </variablelist>
+   </para>
+________________________________________________________-->
+   <para>
+    其他选项：
+
+    <variablelist>
+     <varlistentry>
+       <term><option>-V</option></term>
+       <term><option>--version</option></term>
+       <listitem>
+       <para>
+       打印<application>initdb</application>版本并退出。
+       </para>
+       </listitem>
+     </varlistentry>
+
+     <varlistentry>
+       <term><option>-?</option></term>
+       <term><option>--help</option></term>
+       <listitem>
+       <para>
+       显示有关<application>initdb</application>命令行参数的帮助并退出。
+       </para>
+       </listitem>
+     </varlistentry>
+
+    </variablelist>
+   </para>
+<!-- pgdoc-cn_end sig_en=7b5c28a9877eab4fc3580ad33b9e565b -->
+
+ </refsect1>
+
+ <refsect1>
+<!-- pgdoc-cn_start sig_en=3b1cdb4e9f7c411322dc1c76ca7f31f3 sig_cn_org=None source=14.1 
+  <title>Environment</title>
+________________________________________________________-->
+  <title>环境</title>
+<!-- pgdoc-cn_end sig_en=3b1cdb4e9f7c411322dc1c76ca7f31f3 -->
+
+  <variablelist>
+   <varlistentry>
+    <term><envar>PGDATA</envar></term>
+
+    <listitem>
+<!-- pgdoc-cn_start sig_en=cd1e3cad2ca086d4aaf74a947d9514cc sig_cn_org=None source=14.1 
+     <para>
+      Specifies the directory where the database cluster is to be
+      stored; can be overridden using the <option>-D</option> option.
+     </para>
+________________________________________________________-->
+     <para>
+      指定数据库集簇应该被存放的目录，可以使用<option>-D</option>选项覆盖。
+     </para>
+<!-- pgdoc-cn_end sig_en=cd1e3cad2ca086d4aaf74a947d9514cc -->
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><envar>PG_COLOR</envar></term>
+    <listitem>
+<!-- pgdoc-cn_start sig_en=39edaf7f74e555fd049f4cbfdb1bb1dd sig_cn_org=None source=14.1 
+     <para>
+      Specifies whether to use color in diagnostic messages. Possible values
+      are <literal>always</literal>, <literal>auto</literal> and
+      <literal>never</literal>.
+     </para>
+________________________________________________________-->
+     <para>
+      规定在诊断消息中是否使用颜色。可能的值为<literal>always</literal>、 <literal>auto</literal>、<literal>never</literal>。
+     </para>
+<!-- pgdoc-cn_end sig_en=39edaf7f74e555fd049f4cbfdb1bb1dd -->
+    </listitem>
+   </varlistentry>
+
+   <varlistentry>
+    <term><envar>TZ</envar></term>
+
+    <listitem>
+<!-- pgdoc-cn_start sig_en=52d5ca441df0b872deeeaf776b14665a sig_cn_org=None source=14.1 
+     <para>
+      Specifies the default time zone of the created database cluster.  The
+      value should be a full time zone name
+      (see <xref linkend="datatype-timezones"/>).
+     </para>
+________________________________________________________-->
+     <para>
+      指定创建的数据集簇的默认时区。值应该是一个完整的时区名称（见<xref linkend="datatype-timezones"/>）。
+     </para>
+<!-- pgdoc-cn_end sig_en=52d5ca441df0b872deeeaf776b14665a -->
+    </listitem>
+   </varlistentry>
+  </variablelist>
+
+<!-- pgdoc-cn_start sig_en=18623d3e90c0b63e38e8518be27a3237 sig_cn_org=None source=14.1 
+  <para>
+   This utility, like most other <productname>PostgreSQL</productname> utilities,
+   also uses the environment variables supported by <application>libpq</application>
+   (see <xref linkend="libpq-envars"/>).
+  </para>
+________________________________________________________-->
+  <para>
+   和大部分其他<productname>PostgreSQL</productname>工具相似，这个工具也使用<application>libpq</application>（见<xref linkend="libpq-envars"/>）支持的环境变量。
+  </para>
+<!-- pgdoc-cn_end sig_en=18623d3e90c0b63e38e8518be27a3237 -->
+
+ </refsect1>
+
+ <refsect1>
+<!-- pgdoc-cn_start sig_en=c44fa43baeb4f69a8a2aa1ea108c6e97 sig_cn_org=None source=14.1 
+  <title>Notes</title>
+________________________________________________________-->
+  <title>注解</title>
+<!-- pgdoc-cn_end sig_en=c44fa43baeb4f69a8a2aa1ea108c6e97 -->
+
+<!-- pgdoc-cn_start sig_en=2ed0cd25709a1edbf7d4f664e8a9f798 sig_cn_org=None source=14.1 
+  <para>
+   <command>initdb</command> can also be invoked via
+   <command>pg_ctl initdb</command>.
+  </para>
+________________________________________________________-->
+  <para>
+   <command>initdb</command>可以通过<command>pg_ctl initdb</command>被调用。
+  </para>
+<!-- pgdoc-cn_end sig_en=2ed0cd25709a1edbf7d4f664e8a9f798 -->
+ </refsect1>
+
+ <refsect1>
+<!-- pgdoc-cn_start sig_en=8b7cc214676b443e6527e3d6bf054420 sig_cn_org=None source=14.1 
+  <title>See Also</title>
+________________________________________________________-->
+  <title>参见</title>
+<!-- pgdoc-cn_end sig_en=8b7cc214676b443e6527e3d6bf054420 -->
+
+  <simplelist type="inline">
+   <member><xref linkend="app-pg-ctl"/></member>
+   <member><xref linkend="app-postgres"/></member>
+   <member><xref linkend="auth-pg-hba-conf"/></member>
+  </simplelist>
+ </refsect1>
+
+</refentry>

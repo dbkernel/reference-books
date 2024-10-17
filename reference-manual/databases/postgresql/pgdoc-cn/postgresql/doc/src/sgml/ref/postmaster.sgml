@@ -1,0 +1,71 @@
+<!--
+doc/src/sgml/ref/postmaster.sgml
+PostgreSQL documentation
+-->
+
+<refentry id="app-postmaster">
+<!-- pgdoc-cn_start sig_en=93d6f188164e1f98578c685f337aaa8d sig_cn_org=None source=14.1 
+ <indexterm zone="app-postmaster">
+  <primary>postmaster</primary>
+ </indexterm>
+________________________________________________________-->
+ <indexterm zone="app-postmaster">
+  <primary>postmaster</primary>
+ </indexterm>
+<!-- pgdoc-cn_end sig_en=93d6f188164e1f98578c685f337aaa8d -->
+
+ <refmeta>
+  <refentrytitle><application>postmaster</application></refentrytitle>
+  <manvolnum>1</manvolnum>
+  <refmiscinfo>Application</refmiscinfo>
+ </refmeta>
+
+<!-- pgdoc-cn_start sig_en=3488b1902c45b962b25577ff88c32bdb sig_cn_org=None source=14.1 
+ <refnamediv>
+  <refname>postmaster</refname>
+  <refpurpose><productname>PostgreSQL</productname> database server</refpurpose>
+ </refnamediv>
+________________________________________________________-->
+ <refnamediv>
+  <refname>postmaster</refname>
+  <refpurpose><productname>PostgreSQL</productname>数据库服务器</refpurpose>
+ </refnamediv>
+<!-- pgdoc-cn_end sig_en=3488b1902c45b962b25577ff88c32bdb -->
+
+ <refsynopsisdiv>
+  <cmdsynopsis>
+   <command>postmaster</command>
+   <arg rep="repeat"><replaceable>option</replaceable></arg>
+  </cmdsynopsis>
+ </refsynopsisdiv>
+
+ <refsect1>
+<!-- pgdoc-cn_start sig_en=59d6e86f3a60db4f1e08d0d6e639924e sig_cn_org=None source=14.1 
+  <title>Description</title>
+________________________________________________________-->
+  <title>描述</title>
+<!-- pgdoc-cn_end sig_en=59d6e86f3a60db4f1e08d0d6e639924e -->
+
+<!-- pgdoc-cn_start sig_en=92f5d8669e8e4384f8f09c230f9d64fa sig_cn_org=None source=14.1 
+  <para>
+   <command>postmaster</command> is a deprecated alias of <command>postgres</command>.
+  </para>
+________________________________________________________-->
+  <para>
+   <command>postmaster</command>是<command>postgres</command>的一个废弃的别名。
+  </para>
+<!-- pgdoc-cn_end sig_en=92f5d8669e8e4384f8f09c230f9d64fa -->
+ </refsect1>
+
+ <refsect1>
+<!-- pgdoc-cn_start sig_en=8b7cc214676b443e6527e3d6bf054420 sig_cn_org=None source=14.1 
+  <title>See Also</title>
+________________________________________________________-->
+  <title>参见</title>
+<!-- pgdoc-cn_end sig_en=8b7cc214676b443e6527e3d6bf054420 -->
+
+  <para>
+   <xref linkend="app-postgres"/>
+  </para>
+ </refsect1>
+</refentry>
