@@ -7,3 +7,6 @@
 [submodule "charts/databases/mysql/innodb_diagrams"]
 	path = charts/databases/mysql/innodb_diagrams
 	url = https://github.com/jeremycole/innodb_diagrams.git
+[submodule "reference-manual/databases/elasticsearch/elasticsearch-doc-cn"]
+	path = reference-manual/databases/elasticsearch/elasticsearch-doc-cn
+	url = https://github.com/dev2007/elasticsearch-doc.git

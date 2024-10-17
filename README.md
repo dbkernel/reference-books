@@ -18,7 +18,8 @@
   - [PostgreSQL中文手册](reference-manual/databases/postgresql/pgdoc-cn/)
 
 - 搜索型数据库
-  - [ElasticSearch官方手册中文翻译](reference-manual/databases/elasticsearch/elasticsearch-reference-translation/)
+  - [ElasticSearch官方手册中文翻译（第一个）](reference-manual/databases/elasticsearch/elasticsearch-reference-translation/)
+  - [ElasticSearch官方手册中文翻译（第二个）](reference-manual/databases/elasticsearch/elasticsearch-doc-cn)
 
 ## 图片及其他素材
 
