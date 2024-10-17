@@ -1,0 +1,3 @@
+[submodule "elasticsearch/elasticsearch-reference-translation"]
+	path = elasticsearch/elasticsearch-reference-translation
+	url = https://github.com/rpgmakervx/elasticsearch-reference-translation.git
