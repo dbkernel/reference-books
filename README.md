@@ -16,13 +16,14 @@
   - [Bash在线简易中文教程](books/programming-language/bash/bash-tutorial)
 
 - C语言
-  - [C Primer Plus第六版中文版原书代码和习题答案](book-code/programming-language/cpp-primer-plus-6th)
+  - [《C Primer Plus》第六版中文版原书代码和习题答案](book-code/programming-language/cpp-primer-plus-6th)
 
 ### 数据库
 
-- [设计数据密集型应用 - DDIA中文版](books/databases/ddia-cn)
+- [《设计数据密集型应用》DDIA中文版](books/databases/ddia-cn)
 
-- [设计数据密集型应用 - DDIA中文版 - 逐章精读](books/databases/ddia-cn-notes)
+- [《设计数据密集型应用》DDIA中文版 - 逐章精读](books/databases/ddia-cn-notes)
+- [《ClickHouse原理解析与应用实践》原书代码](book-code/databases/clickhouse/clickhouse-principle-analysis-and-practice)
 
 
 

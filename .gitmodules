@@ -22,3 +22,6 @@
 [submodule "books/databases/ddia-cn"]
 	path = books/databases/ddia-cn
 	url = https://github.com/Vonng/ddia.git
+[submodule "book-code/databases/clickhouse/clickhouse-principle-analysis-and-practice"]
+	path = book-code/databases/clickhouse/clickhouse-principle-analysis-and-practice
+	url = https://github.com/nauu/clickhousebook.git
