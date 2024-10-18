@@ -16,3 +16,9 @@
 [submodule "books/programming-language/bash/bash-tutorial"]
 	path = books/programming-language/bash/bash-tutorial
 	url = https://github.com/wangdoc/bash-tutorial
+[submodule "books/databases/ddia-cn-notes"]
+	path = books/databases/ddia-cn-notes
+	url = https://github.com/DistSysCorp/ddia.git
+[submodule "books/databases/ddia-cn"]
+	path = books/databases/ddia-cn
+	url = https://github.com/Vonng/ddia.git

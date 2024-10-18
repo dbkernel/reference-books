@@ -18,6 +18,12 @@
 - C语言
   - [C Primer Plus第六版中文版原书代码和习题答案](book-code/programming-language/cpp-primer-plus-6th)
 
+### 数据库
+
+- [设计数据密集型应用 - DDIA中文版](books/databases/ddia-cn)
+
+- [设计数据密集型应用 - DDIA中文版 - 逐章精读](books/databases/ddia-cn-notes)
+
 
 
 ## 手册（reference manual）
