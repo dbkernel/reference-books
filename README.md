@@ -9,6 +9,7 @@
 ### 版本控制（version control）
 
 - [git官方中文用户手册.pdf](books/version-control/git中文用户手册.pdf)
+- [C Primer Plus第六版中文版原书代码和习题答案](book-code/programming-language/cpp-primer-plus-6th)
 
 ## 手册（reference manual）
 

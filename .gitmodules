@@ -10,3 +10,6 @@
 [submodule "reference-manual/databases/elasticsearch/elasticsearch-doc-cn"]
 	path = reference-manual/databases/elasticsearch/elasticsearch-doc-cn
 	url = https://github.com/dev2007/elasticsearch-doc.git
+[submodule "book-code/programming-language/cpp-primer-plus-6th"]
+	path = book-code/programming-language/cpp-primer-plus-6th
+	url = https://github.com/ShujiaHuang/Cpp-Primer-Plus-6th.git
