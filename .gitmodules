@@ -13,3 +13,6 @@
 [submodule "book-code/programming-language/cpp-primer-plus-6th"]
 	path = book-code/programming-language/cpp-primer-plus-6th
 	url = https://github.com/ShujiaHuang/Cpp-Primer-Plus-6th.git
+[submodule "books/programming-language/bash/bash-tutorial"]
+	path = books/programming-language/bash/bash-tutorial
+	url = https://github.com/wangdoc/bash-tutorial
