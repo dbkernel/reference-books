@@ -25,3 +25,6 @@
 [submodule "book-code/databases/clickhouse/clickhouse-principle-analysis-and-practice"]
 	path = book-code/databases/clickhouse/clickhouse-principle-analysis-and-practice
 	url = https://github.com/nauu/clickhousebook.git
+[submodule "books/compiler-principles/lex-and-yacc_ZH_CN"]
+	path = books/compiler-principles/lex-and-yacc_ZH_CN
+	url = https://github.com/computer-books/lex-and-yacc_ZH_CN.git

@@ -6,6 +6,13 @@
 
 ## 书籍（books）
 
+### 计算机基础
+
+- [《Lex与Yacc》中文版.pdf](books/compiler-principles/lex-and-yacc_ZH_CN/Lex-and-Yacc-Chinese.pdf)
+- [《Lex与Yacc》中文原书代码](books/compiler-principles/lex-and-yacc_ZH_CN/source-code)
+
+
+
 ### 版本控制（version control）
 
 - [git官方中文用户手册.pdf](books/version-control/git中文用户手册.pdf)
