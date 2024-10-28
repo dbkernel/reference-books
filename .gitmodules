@@ -55,3 +55,6 @@
 [submodule "books/programming-language/golang/gopl"]
 	path = books/programming-language/golang/gopl
 	url = https://github.com/adonovan/gopl.io.git
+[submodule "books/programming-language/rust/too-many-lists"]
+	path = books/programming-language/rust/too-many-lists
+	url = https://github.com/rust-unofficial/too-many-lists.git
