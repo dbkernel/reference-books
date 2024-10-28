@@ -31,6 +31,7 @@
   - [《Go 入门指南》](books/programming-language/golang/the-way-to-go_ZH_CN)：《The Way to Go》的中文翻译版本。
 
 - Rust
+  - [《Rust Primer》中文版](books/programming-language/rust/RustPrimer-CN)：[在线阅读地址](https://rustcc.gitbooks.io/rustprimer/content/)
   - [《Learn Rust by writing Entirely Too Many Linked Lists》](books/programming-language/rust/too-many-lists)
 
 

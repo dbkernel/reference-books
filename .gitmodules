@@ -58,3 +58,6 @@
 [submodule "books/programming-language/rust/too-many-lists"]
 	path = books/programming-language/rust/too-many-lists
 	url = https://github.com/rust-unofficial/too-many-lists.git
+[submodule "books/programming-language/rust/RustPrimer-CN"]
+	path = books/programming-language/rust/RustPrimer-CN
+	url = https://github.com/rustcc/RustPrimer.git
