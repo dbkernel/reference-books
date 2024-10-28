@@ -43,3 +43,6 @@
 [submodule "books/programming-language/golang/advanced-go-programming"]
 	path = books/programming-language/golang/advanced-go-programming
 	url = https://github.com/chai2010/advanced-go-programming-book.git
+[submodule "books/programming-language/golang/go-ast"]
+	path = books/programming-language/golang/go-ast
+	url = https://github.com/chai2010/go-ast-book.git
