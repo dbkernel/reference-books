@@ -31,3 +31,6 @@
 [submodule "reference-manual/databases/postgresql/pgx2-implementation"]
 	path = reference-manual/databases/postgresql/pgx2-implementation
 	url = https://github.com/postgres-x2/implementationDocs.git
+[submodule "reference-manual/databases/postgresql/postgres-x2"]
+	path = reference-manual/databases/postgresql/postgres-x2
+	url = https://github.com/postgres-x2/postgres-x2.github.io.git
