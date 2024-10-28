@@ -52,3 +52,6 @@
 [submodule "reference-manual/programming-language/golang/golang-pkgdoc-cn"]
 	path = reference-manual/programming-language/golang/golang-pkgdoc-cn
 	url = https://github.com/polaris1119/pkgdoc.git
+[submodule "books/programming-language/golang/gopl"]
+	path = books/programming-language/golang/gopl
+	url = https://github.com/adonovan/gopl.io.git
