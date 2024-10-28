@@ -21,9 +21,11 @@
 
 - Bash/Shell
   - [Bash在线简易中文教程](books/programming-language/bash/bash-tutorial)
-
 - C语言
   - [《C Primer Plus》第六版中文版原书代码和习题答案](book-code/programming-language/cpp-primer-plus-6th)
+- Golang
+  - [《Go语言圣经》中文版](books/programming-language/golang/gopl-zh) ：Go语言圣经 [《The Go Programming Language》](http://gopl.io/) 中文版本，仅供学习交流之用。对于希望学习CGO、Go汇编语言等高级用法的同学，我们推荐[《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book)开源图书。如果希望深入学习Go语言语法树结构，可以参考[《Go语法树入门——开启自制编程语言和编译器之旅》](https://github.com/chai2010/go-ast-book)。
+
 
 ### 数据库
 

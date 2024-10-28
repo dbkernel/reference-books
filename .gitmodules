@@ -37,3 +37,6 @@
 [submodule "reference-manual/databases/leveldb/goleveldb-handbook"]
 	path = reference-manual/databases/leveldb/goleveldb-handbook
 	url = https://github.com/rjl493456442/leveldb-handbook.git
+[submodule "books/programming-language/golang/gopl-zh"]
+	path = books/programming-language/golang/gopl-zh
+	url = https://github.com/gopl-zh/gopl-zh.github.com.git
