@@ -40,3 +40,6 @@
 [submodule "books/programming-language/golang/gopl-zh"]
 	path = books/programming-language/golang/gopl-zh
 	url = https://github.com/gopl-zh/gopl-zh.github.com.git
+[submodule "books/programming-language/golang/advanced-go-programming"]
+	path = books/programming-language/golang/advanced-go-programming
+	url = https://github.com/chai2010/advanced-go-programming-book.git
