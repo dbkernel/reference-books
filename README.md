@@ -51,6 +51,10 @@
 - 搜索型数据库
   - [ElasticSearch官方手册中文翻译（第一个）](reference-manual/databases/elasticsearch/elasticsearch-reference-translation/)
   - [ElasticSearch官方手册中文翻译（第二个）](reference-manual/databases/elasticsearch/elasticsearch-doc-cn)
+- 存储引擎：
+  - [goleveldb非官方中文手册](reference-manual/databases/leveldb/goleveldb-handbook)
+    - [在线地址](https://leveldb-handbook.readthedocs.io/zh/latest/index.html)
+
 
 ## 图片及其他素材
 

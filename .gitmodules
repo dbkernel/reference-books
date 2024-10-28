@@ -34,3 +34,6 @@
 [submodule "reference-manual/databases/postgresql/postgres-x2"]
 	path = reference-manual/databases/postgresql/postgres-x2
 	url = https://github.com/postgres-x2/postgres-x2.github.io.git
+[submodule "reference-manual/databases/leveldb/goleveldb-handbook"]
+	path = reference-manual/databases/leveldb/goleveldb-handbook
+	url = https://github.com/rjl493456442/leveldb-handbook.git
