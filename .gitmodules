@@ -28,3 +28,6 @@
 [submodule "books/compiler-principles/lex-and-yacc_ZH_CN"]
 	path = books/compiler-principles/lex-and-yacc_ZH_CN
 	url = https://github.com/computer-books/lex-and-yacc_ZH_CN.git
+[submodule "reference-manual/databases/postgresql/pgx2-implementation"]
+	path = reference-manual/databases/postgresql/pgx2-implementation
+	url = https://github.com/postgres-x2/implementationDocs.git
