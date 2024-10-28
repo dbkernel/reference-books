@@ -52,7 +52,6 @@
     - [《Postgres-XC Concept, Implementation and Achievements》.pdf 英文原版手册，讲解架构及源码实现](reference-manual/databases/postgresql/pgx2-implementation/XCimplementation/pgxc.pdf)
     - [《Postgres-XC Concept, Implementation and Achievements》所用的架构、原理图合集](reference-manual/databases/postgresql/pgx2-implementation/XCimplementation/arch_doc)
     - [《Postgres-XC Concept, Implementation and Achievements》其他资料](reference-manual/databases/postgresql/pgx2-implementation/XCimplementation/)
-
 - 搜索型数据库
   - [ElasticSearch官方手册中文翻译（第一个）](reference-manual/databases/elasticsearch/elasticsearch-reference-translation/)
   - [ElasticSearch官方手册中文翻译（第二个）](reference-manual/databases/elasticsearch/elasticsearch-doc-cn)
@@ -60,6 +59,11 @@
   - [goleveldb非官方中文手册](reference-manual/databases/leveldb/goleveldb-handbook)
     - [在线地址](https://leveldb-handbook.readthedocs.io/zh/latest/index.html)
 
+
+### 编程语言
+
+- Golang：
+  - [Golang标准库和部分第三方包的包文档中文翻译](reference-manual/programming-language/golang/golang-pkgdoc)
 
 ## 图片及其他素材
 

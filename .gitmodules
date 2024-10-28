@@ -48,4 +48,7 @@
 	url = https://github.com/chai2010/go-ast-book.git
 [submodule "books/programming-language/golang/the-way-to-go_ZH_CN"]
 	path = books/programming-language/golang/the-way-to-go_ZH_CN
-	url = https://github.com/unknwon/the-way-to-go_ZH_CN
+	url = https://github.com/unknwon/the-way-to-go_ZH_CN.git
+[submodule "reference-manual/programming-language/golang/golang-pkgdoc-cn"]
+	path = reference-manual/programming-language/golang/golang-pkgdoc-cn
+	url = https://github.com/polaris1119/pkgdoc.git
