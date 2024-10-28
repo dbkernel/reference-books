@@ -24,9 +24,10 @@
 - C语言
   - [《C Primer Plus》第六版中文版原书代码和习题答案](book-code/programming-language/cpp-primer-plus-6th)
 - Golang
-  - [《Go语言圣经》中文版](books/programming-language/golang/gopl-zh) ：Go语言圣经 [《The Go Programming Language》](http://gopl.io/) 中文版本，仅供学习交流之用。对于希望学习CGO、Go汇编语言等高级用法的同学，我们推荐[《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book)开源图书。如果希望深入学习Go语言语法树结构，可以参考[《Go语法树入门——开启自制编程语言和编译器之旅》](https://github.com/chai2010/go-ast-book)。
+  - [《Go语言圣经》中文版 - 柴树杉翻译](books/programming-language/golang/gopl-zh) ：Go语言圣经 [《The Go Programming Language》](http://gopl.io/) 中文版本，仅供学习交流之用。对于希望学习CGO、Go汇编语言等高级用法的同学，我们推荐[《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book)开源图书。如果希望深入学习Go语言语法树结构，可以参考[《Go语法树入门——开启自制编程语言和编译器之旅》](https://github.com/chai2010/go-ast-book)。
   - [《Go语言高级编程》中文书 - 柴树杉](books/programming-language/golang/advanced-go-programming)
   - [《Go语言定制指南》中文书 - 柴树杉](books/programming-language/golang/go-ast) ：原名《Go语法树入门》。Go语法树是Go语言源文件的另一种语义等价的表现形式。而Go语言自带的`go fmt`和`go doc`等命令都是在Go语法树的基础之上分析工具。因此将Go语言程序作为输入数据，让我们语法树这个维度重新审视Go语言程序，我们将得到创建Go语言本身的技术。Go语法树由标准库的`go/ast`包定义，它是在`go/token`包定义的词法基础之上抽象的语法树结构。本书简单介绍语法树相关包的使用。如果想从头实现一个玩具Go语言可以参考[《从头实现µGo语言》](https://github.com/chai2010/ugo-compiler-book)。
+  - [《Go 入门指南》](books/programming-language/golang/the-way-to-go_ZH_CN)：《The Way to Go》的中文翻译版本。
 
 
 ### 数据库

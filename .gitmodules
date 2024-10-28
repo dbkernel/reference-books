@@ -46,3 +46,6 @@
 [submodule "books/programming-language/golang/go-ast"]
 	path = books/programming-language/golang/go-ast
 	url = https://github.com/chai2010/go-ast-book.git
+[submodule "books/programming-language/golang/the-way-to-go_ZH_CN"]
+	path = books/programming-language/golang/the-way-to-go_ZH_CN
+	url = https://github.com/unknwon/the-way-to-go_ZH_CN
